@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.events;
+package ch.toothwit.instactf.events;
 
 
 import java.util.HashSet;
@@ -27,10 +27,10 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import ch.toothwit.instagib.main.Game; 
-import ch.toothwit.instagib.main.GameState;
-import ch.toothwit.instagib.main.Target;
-import ch.toothwit.instagib.main.Util;
+import ch.toothwit.instactf.main.Game; 
+import ch.toothwit.instactf.main.GameState;
+import ch.toothwit.instactf.main.Target;
+import ch.toothwit.instactf.main.Util;
 import ch.toothwit.lobby.main.LobbyAPI;
 
 

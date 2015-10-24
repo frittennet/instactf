@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.main;
+package ch.toothwit.instactf.main;
 
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;

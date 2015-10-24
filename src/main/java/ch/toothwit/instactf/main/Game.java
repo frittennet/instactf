@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.main;
+package ch.toothwit.instactf.main;
 
 import java.text.MessageFormat;
 import java.util.ArrayList;
@@ -44,7 +44,7 @@ public class Game implements LobbyEventHandler {
 					}
 				} 
 			} 
-		}.runTaskTimer(Instagib.get(), 0L, 2L); 
+		}.runTaskTimer(Instactf.get(), 0L, 2L); 
 	} 
 	
 	public static Game get(){
@@ -94,7 +94,7 @@ public class Game implements LobbyEventHandler {
 			n++; 
 		} 
 		
-		countdownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Instagib.get(), new BukkitRunnable() { 
+		countdownTask = Bukkit.getScheduler().scheduleSyncRepeatingTask(Instactf.get(), new BukkitRunnable() { 
 			private int timeLeft = Settings.get().getGameDuration(); 
 			public void run() {
 				timeLeft--; 
@@ -156,7 +156,7 @@ public class Game implements LobbyEventHandler {
 		Bukkit.broadcastMessage(ChatColor.GOLD+"===================================="); 
 		
 		Bukkit.broadcastMessage(MessageFormat.format(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("lobbyMessage")), 5)); 
-		Bukkit.getScheduler().runTaskLater(Instagib.get(), new BukkitRunnable() { 
+		Bukkit.getScheduler().runTaskLater(Instactf.get(), new BukkitRunnable() { 
 			public void run() {                
 				for(Player p : Bukkit.getOnlinePlayers()){ 
 					p.getInventory().clear(); 

@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.events;
+package ch.toothwit.instactf.events;
 
 import org.bukkit.event.Listener;
 import org.bukkit.ChatColor;
@@ -6,7 +6,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.server.ServerListPingEvent;
 import org.bukkit.event.weather.WeatherChangeEvent;
 
-import ch.toothwit.instagib.main.Game;
+import ch.toothwit.instactf.main.Game;
 
 public class ServerEventListener implements Listener {
 	@EventHandler

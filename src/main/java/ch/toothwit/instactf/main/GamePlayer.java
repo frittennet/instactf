@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.main;
+package ch.toothwit.instactf.main;
  
 import java.util.List; 
  

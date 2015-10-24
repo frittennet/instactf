@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.main;
+package ch.toothwit.instactf.main;
 
 import java.io.ByteArrayOutputStream;
 import java.io.DataOutputStream;
@@ -24,9 +24,9 @@ public class Util {
                 }
 
                 if (b != null) {
-                    player.sendPluginMessage(Instagib.get(), "BungeeCord", b.toByteArray());
+                    player.sendPluginMessage(Instactf.get(), "BungeeCord", b.toByteArray());
                 }
             }
-        }.runTaskLater(Instagib.get(), 20L); 
+        }.runTaskLater(Instactf.get(), 20L); 
 	} 
 }

@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.main;
+package ch.toothwit.instactf.main;
 
 import java.io.File;
 import java.io.IOException;
@@ -9,7 +9,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.configuration.file.FileConfiguration;
 
-import ch.toothwit.instagib.main.Instagib; 
+import ch.toothwit.instactf.main.Instactf; 
 
 public class Settings {
 	private static Settings instance;
@@ -25,15 +25,15 @@ public class Settings {
 	}
 
 	public Settings() { 
-		Instagib.get().saveDefaultConfig(); 
-		this.config = Instagib.get().getConfig(); 
+		Instactf.get().saveDefaultConfig(); 
+		this.config = Instactf.get().getConfig(); 
 		
 		reloadConfig(); 
 	}
 
 	public void reloadConfig() {
-		Instagib.get().reloadConfig(); 
-		config = Instagib.get().getConfig(); 
+		Instactf.get().reloadConfig(); 
+		config = Instactf.get().getConfig(); 
 
 		this.spawnLocations = getLocationList("game.spawnLocations"); 
 		this.gameDuration = config.getInt("game.duration"); 
@@ -43,7 +43,7 @@ public class Settings {
 		setLocationList("game.spawnLocations", this.spawnLocations);
 		config.set("game.duration", this.gameDuration);
 		
-		File gameConfig = new File(Instagib.get().getDataFolder() + "/" + "config.yml");
+		File gameConfig = new File(Instactf.get().getDataFolder() + "/" + "config.yml");
 		try {
 			config.save(gameConfig);
 		} catch (IOException e) {

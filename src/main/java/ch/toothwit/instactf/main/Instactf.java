@@ -1,4 +1,4 @@
-package ch.toothwit.instagib.main;
+package ch.toothwit.instactf.main;
 
 import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
@@ -6,13 +6,13 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
-import ch.toothwit.instagib.events.PlayerEventListener;
-import ch.toothwit.instagib.events.ServerEventListener;
+import ch.toothwit.instactf.events.PlayerEventListener;
+import ch.toothwit.instactf.events.ServerEventListener;
 import ch.toothwit.lobby.main.LobbyAPI;
 import net.md_5.bungee.api.ChatColor; 
 
-public class Instagib extends JavaPlugin {
-	private static Instagib instance;
+public class Instactf extends JavaPlugin {
+	private static Instactf instance;
 	
 	
 	@Override
@@ -35,15 +35,15 @@ public class Instagib extends JavaPlugin {
 
 	@Override
 	public boolean onCommand(CommandSender sender, Command command, String label, String[] args) { 
-		if (command.getName().equalsIgnoreCase("insta") || command.getName().equalsIgnoreCase("instagib")) { 
+		if (command.getName().equalsIgnoreCase("insta") || command.getName().equalsIgnoreCase("instactf")) { 
 			String cmd = args[0]; 
 			Player player = (Player)sender; 
-			if(sender.hasPermission("instagib.user")){
+			if(sender.hasPermission("instactf.user")){
 				if(cmd.equalsIgnoreCase("leave")){
 					Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), (Player)sender);
 				}
 			}
-			if(sender.hasPermission("instagib.admin")){
+			if(sender.hasPermission("instactf.admin")){
 				if(cmd.equalsIgnoreCase("addSpawn")){
 					Settings.get().addSpawnLocation(player.getLocation()); 
 					player.sendMessage(ChatColor.GOLD+"Spawn hinzugef\u00FCgt."); 
@@ -66,11 +66,11 @@ public class Instagib extends JavaPlugin {
 		return false; 
 	}
 
-	public static Instagib get() {
+	public static Instactf get() {
 		return instance;
 	}
 
-	public Instagib() {
+	public Instactf() {
 		instance = this;
 	}
 }
