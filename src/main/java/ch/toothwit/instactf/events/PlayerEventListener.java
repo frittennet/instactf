@@ -91,7 +91,6 @@ public class PlayerEventListener implements Listener {
 		if(Game.get().getGameState() != GameState.LOBBY && Game.get().getGameState() != GameState.STOPPED){ 
 			Util.SendToBungeeServer(LobbyAPI.getBungeeLobbyServer(), event.getPlayer());
 		} 
-		event.setJoinMessage(""); 
 	}
 	
 	@EventHandler 

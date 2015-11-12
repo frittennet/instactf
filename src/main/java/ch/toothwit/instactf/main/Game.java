@@ -27,11 +27,16 @@ public class Game implements LobbyEventHandler {
 	private static Game instance; 
 	private HashMap<String, GamePlayer> gamePlayers = new HashMap<String, GamePlayer>(); 
 	private HashMap<String, Integer> cooldowns = new HashMap<String, Integer>(); 
+	
 	private GameState gameState; 
 	 
+	public List<Team> teams = new ArrayList<Team>(); 
+	
 	public Game(){ 
 		LobbyAPI.subscribe(this); 
 		this.reload(); 
+		
+		// cooldown background task ( decrements integer from cooldowns and removes if 0 is hit ) 
 		new BukkitRunnable() { 
 			public void run() { 
 				for(Iterator<Map.Entry<String, Integer>> it = cooldowns.entrySet().iterator(); it.hasNext(); ) { 
@@ -60,6 +65,10 @@ public class Game implements LobbyEventHandler {
 		
 		this.gameState = GameState.LOBBY; 
 		this.gamePlayers = new HashMap<String, GamePlayer>(); 
+		this.teams = new ArrayList<Team>(); 
+		for(int n=1;n<=Settings.get().getTeamCount();n++){ 
+			teams.set(n, Settings.get().getTeam(n)); 
+		} 
 	} 
 	
 	public void setCooldown(Player player){
@@ -78,19 +87,23 @@ public class Game implements LobbyEventHandler {
 		ItemMeta meta = weapon.getItemMeta(); 
 		meta.setDisplayName("Rifle"); 
 		weapon.setItemMeta(meta); 
+		int n=0; 
 		for(Player player : players){ 
 			Inventory inventory = player.getInventory(); 
-			this.gamePlayers.put(player.getUniqueId().toString(), new GamePlayer(player)); 
+			int teamId = n%this.teams.size(); 
+			this.gamePlayers.put(player.getUniqueId().toString(), new GamePlayer(player, this.teams.get(teamId))); 
 			inventory.clear(); 
 			inventory.addItem(weapon); 
+			n++; 
 		} 
 		this.gameState = GameState.RUNNING; 
 		
-		int n=0; 
-		List<Location> locations = Settings.get().getSpawnLocations(); 
+		
 		Bukkit.broadcastMessage(ChatColor.translateAlternateColorCodes('&', Settings.get().getString("gameStarted"))); 
-		for(Player player : Bukkit.getOnlinePlayers()){ 
-			player.teleport(locations.get(n%locations.size())); 
+		n = 0; 
+		for(GamePlayer player : this.gamePlayers.values()){ 
+			List<Location> locations = player.team.SpawnLocations; 
+			player.player.teleport(locations.get(n%locations.size())); 
 			n++; 
 		} 
 		

@@ -45,8 +45,26 @@ public class Instactf extends JavaPlugin {
 			}
 			if(sender.hasPermission("instactf.admin")){
 				if(cmd.equalsIgnoreCase("addSpawn")){
-					Settings.get().addSpawnLocation(player.getLocation()); 
+					if(args.length > 0){ 
+						try{
+							Game.get().teams.get(Integer.parseInt(args[0])).AddSpawnLocation(player.getLocation()); 
+						}
+						catch(Exception ex){ 
+							player.sendMessage("Parameter muss Team sein");
+						}
+					} 
 					player.sendMessage(ChatColor.GOLD+"Spawn hinzugef\u00FCgt."); 
+				}
+				else if(cmd.equalsIgnoreCase("addFlag")){
+					if(args.length > 0){ 
+						try{
+							Game.get().teams.get(Integer.parseInt(args[0])).FlagSpawnLocation = (player.getLocation()); 
+						}
+						catch(Exception ex){ 
+							player.sendMessage("Parameter muss Team sein");
+						}
+					} 
+					player.sendMessage(ChatColor.GOLD+"Flaggenstandort hinzugef\u00FCgt."); 
 				}
 				else if(cmd.equalsIgnoreCase("stop")){
 					Game.get().setGameState(GameState.STOPPED); 

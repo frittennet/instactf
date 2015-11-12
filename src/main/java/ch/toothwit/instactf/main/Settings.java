@@ -12,9 +12,8 @@ import org.bukkit.configuration.file.FileConfiguration;
 import ch.toothwit.instactf.main.Instactf; 
 
 public class Settings {
-	private static Settings instance;
-	private FileConfiguration config;
-	private List<Location> spawnLocations = new ArrayList<Location>(); 
+	private static Settings instance; 
+	private FileConfiguration config; 
 	private int gameDuration; 
 	
 	public static Settings get() {
@@ -35,12 +34,10 @@ public class Settings {
 		Instactf.get().reloadConfig(); 
 		config = Instactf.get().getConfig(); 
 
-		this.spawnLocations = getLocationList("game.spawnLocations"); 
 		this.gameDuration = config.getInt("game.duration"); 
 	}
 
 	public void saveConfig() {
-		setLocationList("game.spawnLocations", this.spawnLocations);
 		config.set("game.duration", this.gameDuration);
 		
 		File gameConfig = new File(Instactf.get().getDataFolder() + "/" + "config.yml");
@@ -63,24 +60,45 @@ public class Settings {
 		List<String> locstrings = config.getStringList(path);
 		List<Location> locs = new ArrayList<Location>();
 		for(String s : locstrings){
-		    locs.add(new Location(Bukkit.getWorld(s.split(" ")[0]), Double.parseDouble(s.split(" ")[1]), Double.parseDouble(s.split(" ")[2]), Double.parseDouble(s.split(" ")[3])));
+		    locs.add(new Location(Bukkit.getWorld(s.split(" ")[0]), Double.parseDouble(s.split(" ")[1]), Double.parseDouble(s.split(" ")[2]), Double.parseDouble(s.split(" ")[3]))); 
 		}
 		return locs; 
 	} 
 	
-	public void test(){
+	public void setLocation(String path, Location loc){ 
+		if(loc == null){ 
+			loc = new Location(Bukkit.getWorlds().get(0), 0d, 100d, 0d); 
+		}
+		config.set(path, loc.getWorld().getName() + " " + loc.getX() + " " + loc.getY() + " " + loc.getZ()); 
+	}
+	
+	public Location getLocation(String path){ 
+		String s = config.getString(path); 
+		return new Location(Bukkit.getWorld(s.split(" ")[0]), Double.parseDouble(s.split(" ")[1]), Double.parseDouble(s.split(" ")[2]), Double.parseDouble(s.split(" ")[3])); 
+	} 
+	
+	public Team getTeam(int team){ 
+		Team t = new Team(); 
+		t.Identifier = team; 
+		t.SpawnLocations = getLocationList("game.teams.team"+team+".spawnLocations"); 
+		t.FlagSpawnLocation = getLocation("game.teams.team"+team+".flagLocation"); 
+		return t; 
+	}
+	
+	public void setTeam(Team t){
+		setLocationList("game.teams.team"+t.Identifier+".spawnLocations", t.SpawnLocations); 
+		setLocation("game.teams.team"+t.Identifier+".flagLocation", t.FlagSpawnLocation); 
+	}
+	
+	public int getTeamCount(){ 
+		int n = 1; 
+		while(config.getConfigurationSection("game.teams.team"+n) != null){ 
+			n++; 
+		} 
 		
-	}
+		return n; 
+	} 
 	
-	public List<Location> getSpawnLocations(){
-		return this.spawnLocations; 
-	}
-	
-	public void addSpawnLocation(Location location){
-		this.spawnLocations.add(location); 
-		saveConfig(); 
-	}
-
 	public int getGameDuration() {
 		return gameDuration;
 	}
