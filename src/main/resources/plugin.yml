@@ -3,7 +3,7 @@ main: ch.toothwit.instactf.main.Instactf
 version: 0.1
 author: fredo121, Houston9000
 description: Instactf Plugin using Spigot API 
-depend: [Lobby]
+depend: [Lobby,BarAPI]
 
 commands:
   instactf:
