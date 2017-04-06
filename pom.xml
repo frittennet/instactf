@@ -26,8 +26,8 @@
       <url>http://codeinabottle.net/mavenRepo/</url>
     </repository>
     <repository>
-	  <id>confuser-repo</id>
-	  <url>http://ci.frostcast.net/plugin/repository/everything</url>
+		<id>inventive-repo</id>
+		<url>https://repo.inventivetalent.org/content/groups/public/</url>
 	</repository>
   </repositories> 
   <dependencies>
@@ -42,9 +42,10 @@
       <version>LATEST</version>
 	</dependency>
 	<dependency>
-      <groupId>me.confuser</groupId>
-      <artifactId>BarAPI</artifactId>
-      <version>3.3</version>
-    </dependency>
+		<groupId>org.inventivetalent</groupId>
+		<artifactId>bossbarapi</artifactId>
+		<version>2.4.1</version> 
+		<scope>provided</scope> 
+	</dependency>
   </dependencies>
 </project>
